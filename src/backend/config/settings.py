@@ -1,13 +1,14 @@
 from pathlib import Path
 from datetime import timedelta
+import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'Ibrahima-Camara-Portfolio'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'Ibrahima-Camara-Portfolio')
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
