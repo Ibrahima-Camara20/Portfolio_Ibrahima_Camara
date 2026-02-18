@@ -3,7 +3,7 @@ from datetime import timedelta
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'change-this-secret-key'
+SECRET_KEY = 'Ibrahima-Camara-Portfolio'
 
 DEBUG = True
 
