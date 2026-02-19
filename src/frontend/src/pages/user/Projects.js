@@ -94,7 +94,11 @@ function Projects() {
                                         </div>
                                     </div>
 
-                                    <p className="card-text mb-3" style={{ whiteSpace: "pre-line" }}>{project.description}</p>
+                                    <p className="card-text mb-3">
+                                        {project.description.split('\n').map((line, i) => (
+                                            <span key={i}>{line}{i < project.description.split('\n').length - 1 && <br />}</span>
+                                        ))}
+                                    </p>
 
                                     {/* Technologies */}
                                     <div className="mb-3">
