@@ -94,7 +94,7 @@ function Projects() {
                                         </div>
                                     </div>
 
-                                    <p className="card-text mb-3">{project.description}</p>
+                                    <p className="card-text mb-3" style={{ whiteSpace: "pre-line" }}>{project.description}</p>
 
                                     {/* Technologies */}
                                     <div className="mb-3">
