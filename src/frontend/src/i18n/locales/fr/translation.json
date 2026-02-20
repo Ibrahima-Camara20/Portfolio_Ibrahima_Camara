@@ -1,0 +1,59 @@
+{
+    "nav": {
+        "home": "Accueil",
+        "contact": "Contact Me",
+        "myContacts": "Mes Contacts",
+        "lang": "English"
+    },
+    "home": {
+        "welcome": "Bienvenue sur mon Portfolio",
+        "description": "Étudiant en Master 1 Intelligence Artificielle à l'Université Côte d'Azur, je recherche une alternance pour mettre à profit mes compétences en développement logiciel, intelligence artificielle et systèmes embarqués. Particulièrement intéressé par les problématiques de cybersécurité, de détection d'anomalies et de systèmes intelligents sécurisés. Curieux, rigoureux et doté d'un bon esprit d'équipe.",
+        "projects": "Projets",
+        "projectsDesc": "Découvrez mes réalisations",
+        "diploma": "Diplôme",
+        "diplomaDesc": "Mon parcours académique",
+        "experience": "Expérience",
+        "experienceDesc": "Mon parcours professionnel",
+        "cv": "CV",
+        "cvDesc": "Téléchargez mon curriculum vitae",
+        "technologiesTitle": "Technologies & Outils"
+    },
+    "education": {
+        "title": "Mon Parcours Académique",
+        "empty": "Aucune formation disponible pour le moment.",
+        "error": "Impossible de charger les formations",
+        "inProgress": "En cours"
+    },
+    "experience": {
+        "title": "Mon Parcours Professionnel",
+        "empty": "Aucune expérience disponible pour le moment.",
+        "error": "Impossible de charger les expériences",
+        "current": "En cours",
+        "today": "Aujourd'hui"
+    },
+    "projects": {
+        "title": "Mes Projets",
+        "empty": "Aucun projet disponible pour le moment.",
+        "error": "Impossible de charger les projets",
+        "technologies": "Technologies :",
+        "demo": "Démo"
+    },
+    "contact": {
+        "title": "Contactez-moi",
+        "nameLabel": "Nom",
+        "namePlaceholder": "Votre nom",
+        "emailLabel": "Email",
+        "emailPlaceholder": "Votre email",
+        "messageLabel": "Message",
+        "messagePlaceholder": "Votre message",
+        "submit": "Envoyer le message",
+        "success": "Message envoyé avec succès !",
+        "error": "Échec de l'envoi du message"
+    },
+    "footer": {
+        "rights": "Tous droits réservés."
+    },
+    "common": {
+        "loading": "Chargement..."
+    }
+}

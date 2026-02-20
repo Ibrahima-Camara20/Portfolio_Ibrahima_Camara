@@ -1,0 +1,59 @@
+{
+    "nav": {
+        "home": "Home",
+        "contact": "Contact Me",
+        "myContacts": "My Contacts",
+        "lang": "Français"
+    },
+    "home": {
+        "welcome": "Welcome to My Portfolio",
+        "description": "Master 1 Artificial Intelligence student at Université Côte d'Azur, seeking an internship to apply my skills in software development, artificial intelligence and embedded systems. Particularly interested in cybersecurity, anomaly detection and secure intelligent systems. Curious, rigorous and a great team player.",
+        "projects": "Projects",
+        "projectsDesc": "Discover my work",
+        "diploma": "Degree",
+        "diplomaDesc": "My academic background",
+        "experience": "Experience",
+        "experienceDesc": "My professional journey",
+        "cv": "Resume",
+        "cvDesc": "Download my resume",
+        "technologiesTitle": "Technologies & Tools"
+    },
+    "education": {
+        "title": "My Academic Background",
+        "empty": "No education available at the moment.",
+        "error": "Unable to load education",
+        "inProgress": "In progress"
+    },
+    "experience": {
+        "title": "My Professional Journey",
+        "empty": "No experience available at the moment.",
+        "error": "Unable to load experiences",
+        "current": "Current",
+        "today": "Today"
+    },
+    "projects": {
+        "title": "My Projects",
+        "empty": "No projects available at the moment.",
+        "error": "Unable to load projects",
+        "technologies": "Technologies:",
+        "demo": "Demo"
+    },
+    "contact": {
+        "title": "Contact Me",
+        "nameLabel": "Name",
+        "namePlaceholder": "Your name",
+        "emailLabel": "Email",
+        "emailPlaceholder": "Your email",
+        "messageLabel": "Message",
+        "messagePlaceholder": "Your message",
+        "submit": "Send Message",
+        "success": "Message sent successfully!",
+        "error": "Failed to send message"
+    },
+    "footer": {
+        "rights": "All rights reserved."
+    },
+    "common": {
+        "loading": "Loading..."
+    }
+}

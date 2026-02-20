@@ -9,7 +9,7 @@ export const AuthProvider = ({ children }) => {
   );
 
   const login = async (username, password) => {
-    const response = await API.post("/token/", { username, password });
+    const response = await API.post("token/", { username, password });
     localStorage.setItem("access", response.data.access);
     localStorage.setItem("refresh", response.data.refresh);
     setIsAuthenticated(true);

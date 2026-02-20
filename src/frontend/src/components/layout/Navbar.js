@@ -1,15 +1,21 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaGlobeAmericas, FaBars, FaTimes } from "react-icons/fa";
-import { useLanguage } from "../../context/LanguageContext";
+import { useTranslation } from "react-i18next";
 import "./Navbar.css";
 
 function Navbar() {
-    const { language, setLanguage } = useLanguage();
+    const { t, i18n } = useTranslation();
     const [menuOpen, setMenuOpen] = useState(false);
 
     const toggleMenu = () => setMenuOpen(!menuOpen);
     const closeMenu = () => setMenuOpen(false);
+
+    const toggleLanguage = () => {
+        const newLang = i18n.language === "fr" ? "en" : "fr";
+        i18n.changeLanguage(newLang);
+        closeMenu();
+    };
 
     return (
         <nav className="custom-navbar">
@@ -28,29 +34,23 @@ function Navbar() {
                 <ul className={`nav-menu ${menuOpen ? "open" : ""}`}>
                     <li className="nav-menu-item">
                         <Link className="nav-menu-link" to="/" onClick={closeMenu}>
-                            Accueil
+                            {t("nav.home")}
                         </Link>
                     </li>
                     <li className="nav-menu-item">
                         <Link className="nav-menu-link" to="/contact" onClick={closeMenu}>
-                            Contact Me
+                            {t("nav.contact")}
                         </Link>
                     </li>
                     <li className="nav-menu-item">
                         <Link className="nav-menu-link" to="/mes-contacts" onClick={closeMenu}>
-                            Mes Contacts
+                            {t("nav.myContacts")}
                         </Link>
                     </li>
                     <li className="nav-menu-item">
-                        <button
-                            className="nav-lang-btn"
-                            onClick={() => {
-                                setLanguage(language === "fr" ? "en" : "fr");
-                                closeMenu();
-                            }}
-                        >
+                        <button className="nav-lang-btn" onClick={toggleLanguage}>
                             <FaGlobeAmericas className="me-2" />
-                            {language === "fr" ? "English" : "Français"}
+                            {t("nav.lang")}
                         </button>
                     </li>
                 </ul>
