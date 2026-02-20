@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaGlobeAmericas, FaBars, FaTimes } from "react-icons/fa";
+import { useLanguage } from "../../context/LanguageContext";
 import "./Navbar.css";
 
-function Navbar({ language, setLanguage }) {
+function Navbar() {
+    const { language, setLanguage } = useLanguage();
     const [menuOpen, setMenuOpen] = useState(false);
 
     const toggleMenu = () => setMenuOpen(!menuOpen);
