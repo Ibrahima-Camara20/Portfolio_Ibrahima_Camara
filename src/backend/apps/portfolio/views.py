@@ -1,7 +1,12 @@
 from rest_framework import viewsets
-from .models import Project, Contact, Education, Experience, Skill
-from .serializers import ProjectSerializer, ContactSerializer, EducationSerializer, ExperienceSerializer, SkillSerializer
+from .models import Project, Contact, Education, Experience, Skill, PersonalInfo
+from .serializers import ProjectSerializer, ContactSerializer, EducationSerializer, ExperienceSerializer, SkillSerializer, PersonalInfoSerializer
 from .permissions import IsAdminOrReadOnly
+
+class PersonalInfoViewSet(viewsets.ModelViewSet):
+    queryset = PersonalInfo.objects.all()
+    serializer_class = PersonalInfoSerializer
+    permission_classes = [IsAdminOrReadOnly]
 
 class ProjectViewSet(viewsets.ModelViewSet):
     queryset = Project.objects.all().order_by('-created_at')

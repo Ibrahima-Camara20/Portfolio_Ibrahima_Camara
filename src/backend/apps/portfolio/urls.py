@@ -1,7 +1,8 @@
 from rest_framework.routers import DefaultRouter
-from .views import ProjectViewSet, ContactViewSet, EducationViewSet, ExperienceViewSet, SkillViewSet
+from .views import ProjectViewSet, ContactViewSet, EducationViewSet, ExperienceViewSet, SkillViewSet, PersonalInfoViewSet
 
 router = DefaultRouter()
+router.register(r'personal-info', PersonalInfoViewSet)
 router.register(r'projects', ProjectViewSet)
 router.register(r'contacts', ContactViewSet)
 router.register(r'education', EducationViewSet)

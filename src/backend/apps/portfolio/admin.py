@@ -1,5 +1,10 @@
 from django.contrib import admin
-from .models import Project, Contact, Education, Experience, Skill
+from .models import Project, Contact, Education, Experience, Skill, PersonalInfo
+
+@admin.register(PersonalInfo)
+class PersonalInfoAdmin(admin.ModelAdmin):
+    list_display = ('full_name', 'email', 'phone', 'location')
+
 
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):

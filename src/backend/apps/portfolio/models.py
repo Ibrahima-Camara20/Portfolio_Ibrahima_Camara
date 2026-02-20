@@ -100,3 +100,20 @@ class Skill(models.Model):
     def __str__(self):
         return f"{self.name} ({self.get_category_display()})"
 
+
+class PersonalInfo(models.Model):
+    full_name = models.CharField(max_length=200)
+    email = models.EmailField()
+    phone = models.CharField(max_length=20)
+    location = models.CharField(max_length=200)
+    linkedin_url = models.URLField(blank=True, null=True)
+    github_url = models.URLField(blank=True, null=True)
+    cv_file = models.FileField(upload_to='cv/', blank=True, null=True)
+    
+    class Meta:
+        verbose_name = "Informations Personnelles"
+        verbose_name_plural = "Informations Personnelles"
+
+    def __str__(self):
+        return self.full_name
+
