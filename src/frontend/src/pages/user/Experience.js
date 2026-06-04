@@ -1,7 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { getExperiences } from "../../services/api";
-import { FaBriefcase, FaCalendar, FaMapMarkerAlt, FaTag } from "react-icons/fa";
+import { FaBriefcase, FaMapMarkerAlt, FaTag, FaClock } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
+
+const CATEGORY_CFG = {
+    student_job: { color: "#06b6d4", bg: "rgba(6,182,212,0.1)",   dot: "#06b6d4" },
+    internship:  { color: "#10b981", bg: "rgba(16,185,129,0.1)",  dot: "#10b981" },
+    permanent:   { color: "#6366f1", bg: "rgba(99,102,241,0.1)",  dot: "#6366f1" },
+    temporary:   { color: "#f59e0b", bg: "rgba(245,158,11,0.1)",  dot: "#f59e0b" },
+    freelance:   { color: "#8b5cf6", bg: "rgba(139,92,246,0.1)",  dot: "#8b5cf6" },
+};
 
 function Experience() {
     const { t, i18n } = useTranslation();
@@ -9,86 +17,106 @@ function Experience() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    useEffect(() => { fetchExperiences(); }, []);
-
-    const fetchExperiences = async () => {
-        try {
-            setLoading(true);
-            const response = await getExperiences();
-            setExperiences(response.data);
-            setError(null);
-        } catch (err) {
-            console.error("Error fetching experiences:", err);
-            setError(t("experience.error"));
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    const getCategoryColor = (category) => {
-        const colors = { student_job: "#4facfe", internship: "#43e97b", permanent: "#667eea", temporary: "#fa709a", freelance: "#f093fb" };
-        return colors[category] || "#667eea";
-    };
+    useEffect(() => {
+        getExperiences()
+            .then((r) => setExperiences(r.data))
+            .catch(() => setError(t("experience.error")))
+            .finally(() => setLoading(false));
+    }, [t]);
 
     const locale = i18n.language === "fr" ? "fr-FR" : "en-GB";
+    const fmt = (d) => new Date(d).toLocaleDateString(locale, { month: "short", year: "numeric" });
 
     if (loading) return (
-        <div className="container py-5 text-center">
-            <div className="spinner-border text-primary" role="status">
-                <span className="visually-hidden">{t("common.loading")}</span>
+        <div className="pf-page pf-loading"><div className="pf-spinner" /></div>
+    );
+
+    if (error) return (
+        <div className="pf-page">
+            <div className="container" style={{ paddingTop: "4rem" }}>
+                <div className="pf-alert pf-alert-danger">{error}</div>
             </div>
         </div>
     );
 
-    if (error) return (
-        <div className="container py-5">
-            <div className="alert alert-danger">{error}</div>
-        </div>
-    );
-
     return (
-        <div className="container py-5">
-            <h1 className="text-center mb-5">
-                <FaBriefcase className="me-3" />
-                {t("experience.title")}
-            </h1>
-            {experiences.length === 0 ? (
-                <div className="alert alert-info text-center">{t("experience.empty")}</div>
-            ) : (
-                <div className="row g-4">
-                    {experiences.map((exp) => (
-                        <div key={exp.id} className="col-lg-6">
-                            <div className="card h-100 border-0 shadow-sm hover-card">
-                                <div className="card-body p-4">
-                                    <div className="d-flex align-items-start mb-3">
-                                        <div className="rounded-circle p-3 me-3" style={{ background: `linear-gradient(135deg, ${getCategoryColor(exp.category)} 0%, ${getCategoryColor(exp.category)}99 100%)`, color: "white" }}>
-                                            <FaBriefcase size={24} />
-                                        </div>
-                                        <div className="flex-grow-1">
-                                            <div className="d-flex justify-content-between align-items-start mb-2">
-                                                <h4 className="card-title mb-0">{exp.title}</h4>
-                                                {exp.is_current && <span className="badge bg-success">{t("experience.current")}</span>}
+        <div className="pf-page">
+            <section className="pf-section">
+                <div className="container">
+                    <div className="pf-section-header">
+                        <span className="pf-section-tag">
+                            <FaBriefcase size={11} /> {t("nav.experience")}
+                        </span>
+                        <h1 className="pf-section-title">{t("experience.title")}</h1>
+                    </div>
+
+                    {experiences.length === 0 ? (
+                        <div className="pf-alert pf-alert-info" style={{ textAlign: "center", maxWidth: 480, margin: "0 auto" }}>
+                            {t("experience.empty")}
+                        </div>
+                    ) : (
+                        <div className="row justify-content-center">
+                            <div className="col-lg-9">
+                                <div className="pf-timeline">
+                                    {experiences.map((exp) => {
+                                        const cfg = CATEGORY_CFG[exp.category] || CATEGORY_CFG.permanent;
+                                        return (
+                                            <div key={exp.id} className="pf-timeline-item">
+                                                <div
+                                                    className="pf-timeline-dot"
+                                                    style={{ background: cfg.dot, boxShadow: `0 0 0 3px ${cfg.bg}` }}
+                                                />
+                                                <div className="pf-card" style={{ padding: "1.75rem", marginLeft: "1.25rem" }}>
+                                                    {/* Top row */}
+                                                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "0.75rem", marginBottom: "0.875rem" }}>
+                                                        <div>
+                                                            <h4 style={{ fontSize: "1.1rem", margin: "0 0 0.2rem", color: "#0f172a" }}>
+                                                                {exp.title}
+                                                            </h4>
+                                                            <p style={{ margin: 0, fontWeight: 600, color: "#334155", fontSize: "0.9rem" }}>
+                                                                {exp.company}
+                                                            </p>
+                                                        </div>
+
+                                                        <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: "0.35rem" }}>
+                                                            {exp.is_current && (
+                                                                <span className="pf-badge" style={{ background: "rgba(16,185,129,0.1)", color: "#10b981" }}>
+                                                                    ● {t("experience.current")}
+                                                                </span>
+                                                            )}
+                                                            <span className="pf-badge" style={{ background: cfg.bg, color: cfg.color }}>
+                                                                <FaTag size={9} />
+                                                                {exp.category_display}
+                                                            </span>
+                                                        </div>
+                                                    </div>
+
+                                                    {/* Meta */}
+                                                    <div style={{ display: "flex", flexWrap: "wrap", gap: "1.25rem", color: "#64748b", fontSize: "0.85rem", marginBottom: exp.description ? "1rem" : 0 }}>
+                                                        <span style={{ display: "flex", alignItems: "center", gap: "0.35rem" }}>
+                                                            <FaMapMarkerAlt size={11} /> {exp.location}
+                                                        </span>
+                                                        <span style={{ display: "flex", alignItems: "center", gap: "0.35rem" }}>
+                                                            <FaClock size={11} />
+                                                            {fmt(exp.start_date)} — {exp.end_date ? fmt(exp.end_date) : t("experience.today")}
+                                                        </span>
+                                                    </div>
+
+                                                    {exp.description && (
+                                                        <p style={{ color: "#475569", fontSize: "0.9rem", margin: 0, lineHeight: 1.75 }}>
+                                                            {exp.description}
+                                                        </p>
+                                                    )}
+                                                </div>
                                             </div>
-                                            <h6 className="text-muted mb-2">{exp.company}</h6>
-                                            <p className="text-muted small mb-2"><FaMapMarkerAlt className="me-2" />{exp.location}</p>
-                                            <p className="text-muted small mb-3">
-                                                <FaCalendar className="me-2" />
-                                                {new Date(exp.start_date).toLocaleDateString(locale, { month: "long", year: "numeric" })} -{" "}
-                                                {exp.end_date ? new Date(exp.end_date).toLocaleDateString(locale, { month: "long", year: "numeric" }) : t("experience.today")}
-                                            </p>
-                                            <span className="badge mb-3" style={{ backgroundColor: getCategoryColor(exp.category) }}>
-                                                <FaTag className="me-1" />{exp.category_display}
-                                            </span>
-                                            <p className="card-text">{exp.description}</p>
-                                        </div>
-                                    </div>
+                                        );
+                                    })}
                                 </div>
                             </div>
                         </div>
-                    ))}
+                    )}
                 </div>
-            )}
-            <style>{`.hover-card{transition:all .3s ease}.hover-card:hover{transform:translateY(-5px);box-shadow:0 10px 30px rgba(0,0,0,.15)!important}`}</style>
+            </section>
         </div>
     );
 }

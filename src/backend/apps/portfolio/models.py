@@ -4,7 +4,8 @@ class Project(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
     technologies = models.CharField(max_length=300)
-    github_link = models.URLField()
+    github_link = models.URLField(blank=True)
+    live_link = models.URLField(blank=True, null=True, help_text="Lien vers la démo en ligne")
     image = models.ImageField(upload_to='projects/', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -103,9 +104,11 @@ class Skill(models.Model):
 
 class PersonalInfo(models.Model):
     full_name = models.CharField(max_length=200)
+    subtitle = models.CharField(max_length=200, blank=True, help_text="Ex: Ingénieur IA & Développeur")
+    bio = models.TextField(blank=True, help_text="Description affichée sur la page d'accueil")
     email = models.EmailField()
-    phone = models.CharField(max_length=20)
-    location = models.CharField(max_length=200)
+    phone = models.CharField(max_length=20, blank=True)
+    location = models.CharField(max_length=200, blank=True)
     linkedin_url = models.URLField(blank=True, null=True)
     github_url = models.URLField(blank=True, null=True)
     cv_file = models.FileField(upload_to='cv/', blank=True, null=True)

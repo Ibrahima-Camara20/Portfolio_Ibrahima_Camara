@@ -9,101 +9,148 @@ function Projects() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    useEffect(() => { fetchProjects(); }, []);
-
-    const fetchProjects = async () => {
-        try {
-            setLoading(true);
-            const response = await getProjects();
-            setProjects(response.data);
-            setError(null);
-        } catch (err) {
-            console.error("Error fetching projects:", err);
-            setError(t("projects.error"));
-        } finally {
-            setLoading(false);
-        }
-    };
+    useEffect(() => {
+        getProjects()
+            .then((r) => setProjects(r.data))
+            .catch(() => setError(t("projects.error")))
+            .finally(() => setLoading(false));
+    }, [t]);
 
     const locale = i18n.language === "fr" ? "fr-FR" : "en-GB";
 
     if (loading) return (
-        <div className="container py-5 text-center">
-            <div className="spinner-border text-primary" role="status">
-                <span className="visually-hidden">{t("common.loading")}</span>
+        <div className="pf-page pf-loading"><div className="pf-spinner" /></div>
+    );
+
+    if (error) return (
+        <div className="pf-page">
+            <div className="container" style={{ paddingTop: "4rem" }}>
+                <div className="pf-alert pf-alert-danger">{error}</div>
             </div>
         </div>
     );
 
-    if (error) return (
-        <div className="container py-5">
-            <div className="alert alert-danger">{error}</div>
-        </div>
-    );
-
     return (
-        <div className="container py-5">
-            <h1 className="text-center mb-5">
-                <FaCode className="me-3" />
-                {t("projects.title")}
-            </h1>
-            {projects.length === 0 ? (
-                <div className="alert alert-info text-center">{t("projects.empty")}</div>
-            ) : (
-                <div className="row g-4">
-                    {projects.map((project) => (
-                        <div key={project.id} className="col-lg-6">
-                            <div className="card h-100 border-0 shadow-sm hover-card">
-                                {project.image && (
-                                    <img src={project.image} className="card-img-top" alt={project.title} style={{ height: "200px", objectFit: "cover" }} />
-                                )}
-                                <div className="card-body p-4">
-                                    <div className="d-flex align-items-start mb-3">
-                                        <div className="rounded-circle p-3 me-3" style={{ background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)", color: "white", minWidth: "60px" }}>
-                                            <FaCode size={24} />
-                                        </div>
-                                        <div className="flex-grow-1">
-                                            <h4 className="card-title mb-2">{project.title}</h4>
-                                            <p className="text-muted small mb-3">
-                                                <FaCalendar className="me-2" />
-                                                {new Date(project.created_at).toLocaleDateString(locale, { day: "numeric", month: "long", year: "numeric" })}
+        <div className="pf-page">
+            <section className="pf-section">
+                <div className="container">
+                    <div className="pf-section-header">
+                        <span className="pf-section-tag">
+                            <FaCode size={11} /> {t("nav.projects")}
+                        </span>
+                        <h1 className="pf-section-title">{t("projects.title")}</h1>
+                    </div>
+
+                    {projects.length === 0 ? (
+                        <div className="pf-alert pf-alert-info" style={{ textAlign: "center", maxWidth: 480, margin: "0 auto" }}>
+                            {t("projects.empty")}
+                        </div>
+                    ) : (
+                        <div className="row g-4">
+                            {projects.map((project) => (
+                                <div key={project.id} className="col-lg-6">
+                                    <div className="pf-card h-100">
+                                        {/* Image / placeholder */}
+                                        {project.image ? (
+                                            <img
+                                                src={project.image}
+                                                alt={project.title}
+                                                style={{ width: "100%", height: 200, objectFit: "cover" }}
+                                            />
+                                        ) : (
+                                            <div style={imgPlaceholder}>
+                                                <FaCode size={44} color="rgba(255,255,255,0.25)" />
+                                            </div>
+                                        )}
+
+                                        <div style={{ padding: "1.5rem" }}>
+                                            {/* Title + date */}
+                                            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "0.5rem", marginBottom: "0.75rem" }}>
+                                                <h4 style={{ fontSize: "1.1rem", margin: 0, color: "#0f172a" }}>
+                                                    {project.title}
+                                                </h4>
+                                                <span style={{ color: "#94a3b8", fontSize: "0.78rem", display: "flex", alignItems: "center", gap: "0.35rem", whiteSpace: "nowrap", flexShrink: 0 }}>
+                                                    <FaCalendar size={10} />
+                                                    {new Date(project.created_at).toLocaleDateString(locale, { month: "short", year: "numeric" })}
+                                                </span>
+                                            </div>
+
+                                            {/* Description */}
+                                            <p style={{ color: "#475569", fontSize: "0.9rem", lineHeight: 1.75, marginBottom: "1.1rem" }}>
+                                                {project.description}
                                             </p>
+
+                                            {/* Technologies */}
+                                            <div style={{ marginBottom: "1.25rem" }}>
+                                                <p style={techLabel}>{t("projects.technologies")}</p>
+                                                <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem" }}>
+                                                    {project.technologies.split(",").map((tech, i) => (
+                                                        <span key={i} style={techBadge}>{tech.trim()}</span>
+                                                    ))}
+                                                </div>
+                                            </div>
+
+                                            {/* Links */}
+                                            <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
+                                                {project.github_link && (
+                                                    <a
+                                                        href={project.github_link}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="pf-btn pf-btn-outline"
+                                                        style={{ fontSize: "0.85rem", padding: "0.5rem 1.25rem" }}
+                                                    >
+                                                        <FaGithub size={14} /> GitHub
+                                                    </a>
+                                                )}
+                                                {project.live_link && (
+                                                    <a
+                                                        href={project.live_link}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="pf-btn pf-btn-primary"
+                                                        style={{ fontSize: "0.85rem", padding: "0.5rem 1.25rem" }}
+                                                    >
+                                                        <FaExternalLinkAlt size={12} /> {t("projects.demo")}
+                                                    </a>
+                                                )}
+                                            </div>
                                         </div>
-                                    </div>
-                                    <p className="card-text mb-3">
-                                        {project.description.split("\n").map((line, i) => (
-                                            <span key={i}>{line}{i < project.description.split("\n").length - 1 && <br />}</span>
-                                        ))}
-                                    </p>
-                                    <div className="mb-3">
-                                        <h6 className="text-muted mb-2">{t("projects.technologies")}</h6>
-                                        <div className="d-flex flex-wrap gap-2">
-                                            {project.technologies.split(",").map((tech, index) => (
-                                                <span key={index} className="badge bg-secondary">{tech.trim()}</span>
-                                            ))}
-                                        </div>
-                                    </div>
-                                    <div className="d-flex gap-2">
-                                        {project.github_link && (
-                                            <a href={project.github_link} target="_blank" rel="noopener noreferrer" className="btn btn-outline-dark btn-sm">
-                                                <FaGithub className="me-2" />GitHub
-                                            </a>
-                                        )}
-                                        {project.live_link && (
-                                            <a href={project.live_link} target="_blank" rel="noopener noreferrer" className="btn btn-outline-primary btn-sm">
-                                                <FaExternalLinkAlt className="me-2" />{t("projects.demo")}
-                                            </a>
-                                        )}
                                     </div>
                                 </div>
-                            </div>
+                            ))}
                         </div>
-                    ))}
+                    )}
                 </div>
-            )}
-            <style>{`.hover-card{transition:all .3s ease}.hover-card:hover{transform:translateY(-5px);box-shadow:0 10px 30px rgba(0,0,0,.15)!important}`}</style>
+            </section>
         </div>
     );
 }
+
+const imgPlaceholder = {
+    height: 180,
+    background: "linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+};
+
+const techLabel = {
+    fontSize: "0.75rem",
+    fontWeight: 700,
+    color: "#94a3b8",
+    textTransform: "uppercase",
+    letterSpacing: "0.8px",
+    marginBottom: "0.5rem",
+};
+
+const techBadge = {
+    background: "rgba(99,102,241,0.08)",
+    color: "#6366f1",
+    padding: "0.25rem 0.65rem",
+    borderRadius: "20px",
+    fontSize: "0.78rem",
+    fontWeight: 500,
+};
 
 export default Projects;

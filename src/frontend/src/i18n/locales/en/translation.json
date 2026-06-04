@@ -1,31 +1,35 @@
 {
     "nav": {
         "home": "Home",
-        "contact": "Contact Me",
+        "projects": "Projects",
+        "education": "Education",
+        "experience": "Experience",
+        "contact": "Contact",
         "myContacts": "My Contacts",
         "lang": "Français"
     },
     "home": {
-        "welcome": "Welcome to My Portfolio",
-        "description": "Master 1 Artificial Intelligence student at Université Côte d'Azur, seeking an internship to apply my skills in software development, artificial intelligence and embedded systems. Particularly interested in cybersecurity, anomaly detection and secure intelligent systems. Curious, rigorous and a great team player.",
+        "welcome": "Hi, I'm",
+        "description": "Master 1 Artificial Intelligence student at Université Côte d'Azur, seeking an apprenticeship to apply my skills in software development, artificial intelligence and embedded systems. Particularly interested in cybersecurity, anomaly detection and secure intelligent systems.",
         "projects": "Projects",
         "projectsDesc": "Discover my work",
-        "diploma": "Degree",
+        "diploma": "Education",
         "diplomaDesc": "My academic background",
         "experience": "Experience",
         "experienceDesc": "My professional journey",
-        "cv": "Resume",
-        "cvDesc": "Download my resume",
-        "technologiesTitle": "Technologies & Tools"
+        "cv": "My Contacts",
+        "cvDesc": "Contact details & resume",
+        "technologiesTitle": "Technologies & Tools",
+        "subtitle": "AI Engineer & Developer"
     },
     "education": {
-        "title": "My Academic Background",
+        "title": "Academic Background",
         "empty": "No education available at the moment.",
         "error": "Unable to load education",
         "inProgress": "In progress"
     },
     "experience": {
-        "title": "My Professional Journey",
+        "title": "Professional Experience",
         "empty": "No experience available at the moment.",
         "error": "Unable to load experiences",
         "current": "Current",
@@ -35,23 +39,32 @@
         "title": "My Projects",
         "empty": "No projects available at the moment.",
         "error": "Unable to load projects",
-        "technologies": "Technologies:",
+        "technologies": "Technologies",
         "demo": "Demo"
     },
     "contact": {
-        "title": "Contact Me",
+        "title": "Get in Touch",
+        "tagline": "I'm open to internship and apprenticeship opportunities. Don't hesitate to reach out!",
         "nameLabel": "Name",
         "namePlaceholder": "Your name",
         "emailLabel": "Email",
         "emailPlaceholder": "Your email",
+        "phoneLabel": "Phone",
         "messageLabel": "Message",
         "messagePlaceholder": "Your message",
         "submit": "Send Message",
+        "sending": "Sending...",
         "success": "Message sent successfully!",
-        "error": "Failed to send message"
+        "successDesc": "I'll get back to you as soon as possible.",
+        "error": "Failed to send message. Please try again."
+    },
+    "myContacts": {
+        "location": "Location",
+        "noData": "No information available. Add them via the backend!"
     },
     "footer": {
-        "rights": "All rights reserved."
+        "rights": "All rights reserved.",
+        "tagline": "Built with passion"
     },
     "common": {
         "loading": "Loading..."

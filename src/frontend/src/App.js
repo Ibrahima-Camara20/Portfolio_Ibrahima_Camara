@@ -11,16 +11,15 @@ import ProtectedRoute from "./components/common/ProtectedRoute";
 import Home from "./pages/user/Home";
 import Projects from "./pages/user/Projects";
 import Contact from "./pages/user/Contact";
+import MyContacts from "./pages/user/MyContacts";
 import Education from "./pages/user/Education";
 import Experience from "./pages/user/Experience";
 
 import Login from "./pages/admin/Login";
-import Dashboard from "./pages/admin/Dashboard";
-import ManageProjects from "./pages/admin/ManageProjects";
 
 function App() {
   return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       <Routes>
         {/* USER */}
         <Route
@@ -34,6 +33,7 @@ function App() {
                 <Route path="/education" element={<Education />} />
                 <Route path="/experience" element={<Experience />} />
                 <Route path="/contact" element={<Contact />} />
+                <Route path="/mes-contacts" element={<MyContacts />} />
               </Routes>
               <Footer />
             </>

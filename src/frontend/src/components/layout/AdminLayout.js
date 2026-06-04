@@ -1,46 +1,88 @@
-import React from "react";
-import { Routes, Route, Link } from "react-router-dom";
-import Dashboard from "../../pages/admin/Dashboard";
+import React, { useContext } from "react";
+import { Routes, Route, NavLink, Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
+import {
+    FaTachometerAlt, FaUser, FaCode, FaGraduationCap,
+    FaBriefcase, FaTools, FaEnvelope, FaSignOutAlt, FaGlobe,
+} from "react-icons/fa";
+import Dashboard      from "../../pages/admin/Dashboard";
+import ManageProfile  from "../../pages/admin/ManageProfile";
 import ManageProjects from "../../pages/admin/ManageProjects";
+import ManageEducation  from "../../pages/admin/ManageEducation";
+import ManageExperience from "../../pages/admin/ManageExperience";
+import ManageSkills   from "../../pages/admin/ManageSkills";
+import ManageContacts from "../../pages/admin/ManageContacts";
+import "./admin.css";
+
+const NAV = [
+    { to: "/admin/dashboard",   label: "Dashboard",   icon: <FaTachometerAlt size={13} /> },
+    { to: "/admin/profile",     label: "Profil",      icon: <FaUser size={13} /> },
+    { to: "/admin/projects",    label: "Projets",     icon: <FaCode size={13} /> },
+    { to: "/admin/education",   label: "Formation",   icon: <FaGraduationCap size={13} /> },
+    { to: "/admin/experience",  label: "Expérience",  icon: <FaBriefcase size={13} /> },
+    { to: "/admin/skills",      label: "Compétences", icon: <FaTools size={13} /> },
+    { to: "/admin/contacts",    label: "Messages",    icon: <FaEnvelope size={13} /> },
+];
 
 function AdminLayout() {
-    return (
-        <div className="container-fluid">
-            <div className="row">
-                {/* Sidebar */}
-                <nav className="col-md-3 col-lg-2 d-md-block bg-light sidebar">
-                    <div className="position-sticky pt-3">
-                        <h5 className="px-3">Admin Panel</h5>
-                        <ul className="nav flex-column">
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/admin/dashboard">
-                                    Dashboard
-                                </Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/admin/projects">
-                                    Manage Projects
-                                </Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/">
-                                    Back to Site
-                                </Link>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
+    const { logout } = useContext(AuthContext);
+    const navigate = useNavigate();
 
-                {/* Main Content */}
-                <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                    <div className="pt-3">
-                        <Routes>
-                            <Route path="dashboard" element={<Dashboard />} />
-                            <Route path="projects" element={<ManageProjects />} />
-                        </Routes>
-                    </div>
-                </main>
-            </div>
+    const handleLogout = () => {
+        logout();
+        navigate("/admin/login");
+    };
+
+    return (
+        <div className="admin-wrapper">
+            {/* ── Sidebar ── */}
+            <aside className="admin-sidebar">
+                <div className="sidebar-logo">
+                    <div className="sidebar-logo-mark">IC</div>
+                    <span className="sidebar-logo-text">Ibrahima Camara</span>
+                    <span className="sidebar-logo-sub">Admin Panel</span>
+                </div>
+
+                <nav className="sidebar-nav">
+                    <p className="sidebar-section-label">Navigation</p>
+                    {NAV.map((item) => (
+                        <NavLink
+                            key={item.to}
+                            to={item.to}
+                            className={({ isActive }) =>
+                                `sidebar-link${isActive ? " active" : ""}`
+                            }
+                        >
+                            <span className="sidebar-icon">{item.icon}</span>
+                            {item.label}
+                        </NavLink>
+                    ))}
+
+                    <p className="sidebar-section-label" style={{ marginTop: "0.75rem" }}>Autre</p>
+                    <Link to="/" className="sidebar-link">
+                        <span className="sidebar-icon"><FaGlobe size={13} /></span>
+                        Voir le site
+                    </Link>
+                    <button className="sidebar-link" onClick={handleLogout}>
+                        <span className="sidebar-icon"><FaSignOutAlt size={13} /></span>
+                        Déconnexion
+                    </button>
+                </nav>
+            </aside>
+
+            {/* ── Main content ── */}
+            <main className="admin-main">
+                <Routes>
+                    <Route path="dashboard"  element={<Dashboard />} />
+                    <Route path="profile"    element={<ManageProfile />} />
+                    <Route path="projects"   element={<ManageProjects />} />
+                    <Route path="education"  element={<ManageEducation />} />
+                    <Route path="experience" element={<ManageExperience />} />
+                    <Route path="skills"     element={<ManageSkills />} />
+                    <Route path="contacts"   element={<ManageContacts />} />
+                    <Route path="*"          element={<Dashboard />} />
+                </Routes>
+            </main>
         </div>
     );
 }

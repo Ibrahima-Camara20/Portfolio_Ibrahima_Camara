@@ -1,133 +1,172 @@
-/* ===== NAVBAR ===== */
+/* ─── Shell ────────────────────────────────────── */
 .custom-navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    background: rgba(15, 15, 25, 0.95);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  z-index: 1000;
+  height: 64px;
+  background: rgba(8, 12, 24, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
+/* ─── Container ────────────────────────────────── */
 .navbar-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-    height: 64px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
 }
 
-/* Logo */
+/* ─── Logo ─────────────────────────────────────── */
 .navbar-logo {
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: #fff;
-    text-decoration: none;
-    letter-spacing: 0.5px;
-    background: linear-gradient(135deg, #a78bfa, #60a5fa);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  font-size: 1.25rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #a78bfa 0%, #60a5fa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-decoration: none;
+  letter-spacing: -0.5px;
 }
 
-/* ===== HAMBURGER ===== */
+/* ─── Hamburger button ─────────────────────────── */
 .hamburger-btn {
-    background: none;
-    border: none;
-    color: #fff;
-    font-size: 1.5rem;
-    cursor: pointer;
-    padding: 0.4rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 6px;
-    transition: background 0.2s;
-    z-index: 1100;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  border-radius: 6px;
+  transition: background 0.2s;
+  z-index: 1100;
 }
 
 .hamburger-btn:hover {
-    background: rgba(167, 139, 250, 0.15);
+  background: rgba(255, 255, 255, 0.06);
 }
 
-/* ===== DROPDOWN MENU ===== */
-.nav-menu {
-    position: absolute;
-    top: calc(100% + 8px);
-    right: 1.5rem;
-    background: rgba(20, 20, 35, 0.97);
-    backdrop-filter: blur(16px);
-    border: 1px solid rgba(167, 139, 250, 0.2);
-    border-radius: 12px;
-    list-style: none;
-    margin: 0;
-    padding: 0.5rem 0;
-    min-width: 200px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+.bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 2px;
+  transition: transform 0.25s ease, opacity 0.2s ease, width 0.25s ease;
+  transform-origin: center;
+}
 
-    /* Animation */
-    opacity: 0;
-    transform: translateY(-10px) scale(0.97);
-    pointer-events: none;
-    transition: opacity 0.2s ease, transform 0.2s ease;
+/* Animated bars → X when open */
+.hamburger-btn.open .bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.hamburger-btn.open .bar:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.hamburger-btn.open .bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ─── Dropdown menu ────────────────────────────── */
+.nav-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 1.5rem;
+  width: 220px;
+  max-width: calc(100vw - 3rem);
+  background: rgba(12, 17, 34, 0.97);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+
+  /* Hidden state */
+  opacity: 0;
+  transform: translateY(-8px) scale(0.97);
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  transform-origin: top right;
 }
 
 .nav-menu.open {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    pointer-events: all;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: all;
 }
 
-.nav-menu-item {
-    padding: 0;
+/* ─── Menu items ───────────────────────────────── */
+.nav-menu-list {
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem;
 }
 
-.nav-menu-link {
-    display: block;
-    padding: 0.75rem 1.25rem;
-    color: #d1d5db;
-    text-decoration: none;
-    font-size: 0.95rem;
-    font-weight: 500;
-    transition: color 0.2s, background 0.2s;
-    border-left: 2px solid transparent;
+.nav-menu-item a {
+  display: block;
+  padding: 0.65rem 1rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: color 0.15s, background 0.15s;
 }
 
-.nav-menu-link:hover {
-    color: #a78bfa;
-    background: rgba(167, 139, 250, 0.08);
-    border-left-color: #a78bfa;
+.nav-menu-item a:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.06);
 }
 
-/* Language button */
+.nav-menu-item a.active {
+  color: #a78bfa;
+  background: rgba(167, 139, 250, 0.1);
+  font-weight: 600;
+}
+
+/* ─── Language button ──────────────────────────── */
+.menu-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.06);
+  margin: 0.25rem 0.5rem;
+}
+
 .nav-lang-btn {
-    width: 100%;
-    background: none;
-    border: none;
-    border-top: 1px solid rgba(255, 255, 255, 0.07);
-    padding: 0.75rem 1.25rem;
-    color: #9ca3af;
-    font-size: 0.9rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: color 0.2s, background 0.2s;
+  width: 100%;
+  margin: 0;
+  padding: 0.65rem 1rem;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 8px;
+  transition: color 0.15s, background 0.15s;
+  font-family: inherit;
 }
 
 .nav-lang-btn:hover {
-    color: #60a5fa;
-    background: rgba(96, 165, 250, 0.08);
+  color: white;
+  background: rgba(255, 255, 255, 0.06);
 }
 
-/* ===== OVERLAY ===== */
+/* ─── Overlay ──────────────────────────────────── */
 .menu-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 999;
-    background: transparent;
+  position: fixed;
+  inset: 0;
+  z-index: 999;
 }

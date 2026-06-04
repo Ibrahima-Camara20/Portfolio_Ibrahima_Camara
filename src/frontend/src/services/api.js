@@ -27,5 +27,8 @@ export const getSkills = () => API.get("skills/");
 // Contacts
 export const createContact = (data) => API.post("contacts/", data);
 
+// Personal Info
+export const getPersonalInfo = () => API.get("personal-info/");
+
 export default API;
 
