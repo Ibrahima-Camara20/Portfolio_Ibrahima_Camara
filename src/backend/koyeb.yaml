@@ -1,0 +1,32 @@
+name: portfolio-backend
+
+services:
+  - name: api
+    type: web
+    git:
+      repository: github.com/Ibrahima-Camara20/Ibrahima_Camara
+      branch: main
+      dockerfile: backend/Dockerfile
+      build_context: backend
+    ports:
+      - port: 8000
+        protocol: http
+    routes:
+      - port: 8000
+        path: /
+    instance_types:
+      - type: free
+    scalings:
+      - min: 1
+        max: 1
+    env:
+      - key: DEBUG
+        value: "False"
+      - key: SECRET_KEY
+        secret: true
+      - key: ALLOWED_HOSTS
+        value: ".koyeb.app"
+      - key: DATABASE_URL
+        secret: true
+      - key: FRONTEND_URL
+        value: "https://Ibrahima-Camara20.github.io"
