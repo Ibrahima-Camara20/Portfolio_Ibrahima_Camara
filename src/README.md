@@ -61,9 +61,3 @@ src/
 ├── docker-compose.yml
 └── render.yaml       Configuration Render
 ```
-
-## Me contacter
-
-Si tu as des questions sur le projet ou simplement envie d'échanger, tu peux m'écrire directement depuis la page contact du site ou retrouver mes coordonnées sur la page Mes Contacts.
-
-Merci de ta visite.
