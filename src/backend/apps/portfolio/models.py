@@ -71,13 +71,14 @@ class Experience(models.Model):
 
 class Skill(models.Model):
     CATEGORY_CHOICES = [
-        ('languages', 'Langages'),
-        ('langues', 'Langues'),
-        ('methodes', 'Méthodes'),
-        ('ai_ml', 'Intelligence Artificielle & Machine Learning'),
-        ('web_frameworks', 'Frameworks Web'),
-        ('databases', 'Bases de Données'),
-        ('tools_devops', 'Outils & DevOps'),
+        ('languages',       'Langages'),
+        ('langues',         'Langues'),
+        ('methodes',        'Méthodes'),
+        ('machine_learning','Machine Learning'),
+        ('deep_learning',   'Deep Learning'),
+        ('web_frameworks',  'Frameworks Web'),
+        ('databases',       'Bases de Données'),
+        ('tools_mlops',     'Outils & MLOps'),
     ]
     
     PROFICIENCY_CHOICES = [

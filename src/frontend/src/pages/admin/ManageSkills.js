@@ -3,13 +3,14 @@ import API from "../../services/api";
 import { FaEdit, FaTrash, FaPlus, FaTimes } from "react-icons/fa";
 
 const CATEGORIES = [
-    { value: "languages",      label: "Langages" },
-    { value: "langues",        label: "Langues" },
-    { value: "methodes",       label: "Méthodes" },
-    { value: "ai_ml",          label: "IA & Machine Learning" },
-    { value: "web_frameworks", label: "Frameworks Web" },
-    { value: "databases",      label: "Bases de Données" },
-    { value: "tools_devops",   label: "Outils & DevOps" },
+    { value: "languages",        label: "Langages" },
+    { value: "langues",          label: "Langues" },
+    { value: "methodes",         label: "Méthodes" },
+    { value: "machine_learning", label: "Machine Learning" },
+    { value: "deep_learning",    label: "Deep Learning" },
+    { value: "web_frameworks",   label: "Frameworks Web" },
+    { value: "databases",        label: "Bases de Données" },
+    { value: "tools_mlops",      label: "Outils & MLOps" },
 ];
 
 const PROFICIENCY = [

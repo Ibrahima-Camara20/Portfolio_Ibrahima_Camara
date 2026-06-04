@@ -8,13 +8,14 @@ import API, { getSkills } from "../../services/api";
 import { useTranslation } from "react-i18next";
 
 const CATEGORY_COLORS = {
-    languages:      { color: "#6366f1", bg: "rgba(99,102,241,0.09)" },
-    langues:        { color: "#334155", bg: "rgba(51,65,85,0.08)" },
-    methodes:       { color: "#64748b", bg: "rgba(100,116,139,0.09)" },
-    ai_ml:          { color: "#10b981", bg: "rgba(16,185,129,0.09)" },
-    web_frameworks: { color: "#06b6d4", bg: "rgba(6,182,212,0.09)" },
-    databases:      { color: "#f59e0b", bg: "rgba(245,158,11,0.1)" },
-    tools_devops:   { color: "#ef4444", bg: "rgba(239,68,68,0.09)" },
+    languages:        { color: "#6366f1", bg: "rgba(99,102,241,0.09)" },
+    langues:          { color: "#334155", bg: "rgba(51,65,85,0.08)" },
+    methodes:         { color: "#64748b", bg: "rgba(100,116,139,0.09)" },
+    machine_learning: { color: "#10b981", bg: "rgba(16,185,129,0.09)" },
+    deep_learning:    { color: "#8b5cf6", bg: "rgba(139,92,246,0.09)" },
+    web_frameworks:   { color: "#06b6d4", bg: "rgba(6,182,212,0.09)" },
+    databases:        { color: "#f59e0b", bg: "rgba(245,158,11,0.1)" },
+    tools_mlops:      { color: "#ef4444", bg: "rgba(239,68,68,0.09)" },
 };
 
 function Home() {
