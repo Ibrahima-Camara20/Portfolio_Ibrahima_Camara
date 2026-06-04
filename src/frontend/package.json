@@ -2,7 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://Ibrahima-Camara20.github.io/Ibrahima_Camara",
+  "homepage": "https://ibrahima-camara20.github.io/Portfolio_Ibrahima_Camara",
   "dependencies": {
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
