@@ -19,7 +19,7 @@ La base de données est PostgreSQL en production. En développement local, SQLit
 La façon la plus simple est d'utiliser Docker. Tu n'as besoin d'installer rien d'autre sur ta machine.
 
 ```bash
-docker compose up
+docker  compose up
 ```
 
 Le frontend sera accessible sur http://localhost:3000 et l'API sur http://localhost:8000/api.
