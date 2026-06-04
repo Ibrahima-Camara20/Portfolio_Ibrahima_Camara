@@ -7,7 +7,7 @@ ENV PYTHONUNBUFFERED=1
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libpq-dev gcc \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/calls/*
 
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
@@ -21,5 +21,5 @@ EXPOSE 8000
 CMD python manage.py migrate && \
     python manage.py createsuperuser --noinput \
       --username $DJANGO_SUPERUSER_USERNAME \
-      --email $DJANGO_SUPERUSER_EMAIL || true && \
+      --email $DJANGO_SUPERUSER_EMAIL 2>/dev/null || true && \
     gunicorn config.wsgi:application --bind 0.0.0.0:${PORT:-8000} --workers 2
