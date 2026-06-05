@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getPersonalInfo } from "../../services/api";
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaLinkedin, FaGithub, FaFileDownload } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
+import PageHero from "../../components/common/PageHero";
 
 function MyContacts() {
     const { t } = useTranslation();
@@ -15,9 +16,7 @@ function MyContacts() {
             .finally(() => setLoading(false));
     }, []);
 
-    if (loading) return (
-        <div className="pf-page pf-loading"><div className="pf-spinner" /></div>
-    );
+    if (loading) return <div className="pf-page pf-loading"><div className="pf-spinner" /></div>;
 
     if (!info) return (
         <div className="pf-page">
@@ -48,25 +47,39 @@ function MyContacts() {
 
     return (
         <div className="pf-page">
-            <section className="pf-section-alt" style={{ minHeight: "calc(100vh - 64px)" }}>
+            <PageHero
+                icon={<FaEnvelope size={11} />}
+                tag={t("nav.myContacts")}
+                title={info.full_name}
+                subtitle={info.subtitle}
+            />
+
+            <section className="pf-section">
                 <div className="container">
                     <div className="row justify-content-center">
                         <div className="col-lg-5 col-md-7">
 
-                            {/* Profile card */}
-                            <div className="pf-card" style={{ marginBottom: "1.25rem", overflow: "visible" }}>
-                                {/* Gradient header */}
-                                <div style={profileHeader}>
+                            {/* Contact details card */}
+                            <div className="pf-card" style={{ marginBottom: "1.25rem" }}>
+                                {/* Avatar + name */}
+                                <div style={profileTop}>
                                     <div style={avatarStyle}>{initials}</div>
-                                    <h2 style={{ color: "white", margin: "0 0 0.3rem", fontSize: "1.5rem", fontWeight: 800 }}>
-                                        {info.full_name}
-                                    </h2>
-                                    <p style={{ color: "rgba(255,255,255,0.7)", margin: 0, fontSize: "0.9rem", display: "flex", alignItems: "center", justifyContent: "center", gap: "0.4rem" }}>
-                                        <FaMapMarkerAlt size={11} /> {info.location}
-                                    </p>
+                                    <div>
+                                        <h2 style={{ margin: "0 0 0.2rem", fontSize: "1.3rem", fontWeight: 800, color: "#0f172a" }}>
+                                            {info.full_name}
+                                        </h2>
+                                        {info.subtitle && (
+                                            <p style={{ margin: 0, fontSize: "0.9rem", color: "#6366f1", fontWeight: 600 }}>
+                                                {info.subtitle}
+                                            </p>
+                                        )}
+                                    </div>
                                 </div>
 
-                                {/* Contact details */}
+                                {/* Divider */}
+                                <div style={{ height: 1, background: "#f1f5f9", margin: "0 1.75rem" }} />
+
+                                {/* Contact list */}
                                 <div style={{ padding: "0.5rem 1.75rem 1.75rem" }}>
                                     {contactItems.map((item, i) => (
                                         <div key={i} style={{
@@ -122,26 +135,25 @@ function MyContacts() {
     );
 }
 
-const profileHeader = {
-    background: "linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)",
-    padding: "2.5rem 1.75rem 2rem",
-    textAlign: "center",
-    borderRadius: "16px 16px 0 0",
+const profileTop = {
+    display: "flex",
+    alignItems: "center",
+    gap: "1.25rem",
+    padding: "1.75rem 1.75rem 1.25rem",
 };
 
 const avatarStyle = {
-    width: 78,
-    height: 78,
+    width: 64,
+    height: 64,
     borderRadius: "50%",
-    background: "rgba(255,255,255,0.18)",
-    border: "3px solid rgba(255,255,255,0.3)",
+    background: "linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    fontSize: "1.8rem",
+    fontSize: "1.4rem",
     fontWeight: 900,
     color: "white",
-    margin: "0 auto 1rem",
+    flexShrink: 0,
     letterSpacing: "-1px",
 };
 

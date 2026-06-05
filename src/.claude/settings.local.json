@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "Read(//c/Users/camar/OneDrive/Documents/Portfolio_Ibrahima_Camara/**)",
+      "Bash(docker compose *)"
     ]
   }
 }

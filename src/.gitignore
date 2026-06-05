@@ -1,0 +1,5 @@
+# Variables d'environnement locales — ne jamais committer
+.env
+
+# Base SQLite locale
+backend/db.sqlite3

@@ -20,7 +20,8 @@
         "cv": "My Contacts",
         "cvDesc": "Contact details & resume",
         "technologiesTitle": "Technologies & Tools",
-        "subtitle": "AI Engineer & Developer"
+        "subtitle": "AI Engineer & Developer",
+        "featuresTitle": "What you'll find here"
     },
     "education": {
         "title": "Academic Background",
@@ -37,14 +38,23 @@
     },
     "projects": {
         "title": "My Projects",
+        "subtitle": "A selection of my technical and creative work",
         "empty": "No projects available at the moment.",
         "error": "Unable to load projects",
         "technologies": "Technologies",
-        "demo": "Demo"
+        "demo": "Demo",
+        "count": "projects built",
+        "seeMore": "Read more",
+        "seeLess": "Show less"
     },
     "contact": {
         "title": "Get in Touch",
         "tagline": "I'm open to internship and apprenticeship opportunities. Don't hesitate to reach out!",
+        "sideSectionTitle": "Let's stay in touch",
+        "sideAvailabilityLabel": "Availability",
+        "sideAvailabilityValue": "Available for an apprenticeship",
+        "sideResponseLabel": "Response time",
+        "sideResponseValue": "I reply within 24 to 48 hours",
         "nameLabel": "Name",
         "namePlaceholder": "Your name",
         "emailLabel": "Email",
@@ -56,6 +66,7 @@
         "sending": "Sending...",
         "success": "Message sent successfully!",
         "successDesc": "I'll get back to you as soon as possible.",
+        "newMessage": "New message",
         "error": "Failed to send message. Please try again."
     },
     "myContacts": {

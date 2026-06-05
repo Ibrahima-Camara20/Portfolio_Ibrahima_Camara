@@ -4,6 +4,8 @@ import { initReactI18next } from "react-i18next";
 import fr from "./locales/fr/translation.json";
 import en from "./locales/en/translation.json";
 
+const savedLang = localStorage.getItem("lang") || "fr";
+
 i18n
     .use(initReactI18next)
     .init({
@@ -11,11 +13,15 @@ i18n
             fr: { translation: fr },
             en: { translation: en },
         },
-        lng: "fr",           // langue par défaut
-        fallbackLng: "fr",   // fallback si clé manquante
+        lng: savedLang,
+        fallbackLng: "fr",
         interpolation: {
-            escapeValue: false, // React gère déjà le XSS
+            escapeValue: false,
         },
     });
+
+i18n.on("languageChanged", (lng) => {
+    localStorage.setItem("lang", lng);
+});
 
 export default i18n;

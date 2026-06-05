@@ -133,7 +133,7 @@ function Home() {
                 <div className="container">
                     <div className="pf-section-header">
                         <span className="pf-section-tag">Portfolio</span>
-                        <h2 className="pf-section-title">Ce que vous trouverez ici</h2>
+                        <h2 className="pf-section-title">{t("home.featuresTitle")}</h2>
                     </div>
                     <div className="row g-4">
                         {features.map((f, i) => (

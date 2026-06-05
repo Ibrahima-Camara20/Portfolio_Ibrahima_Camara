@@ -4,7 +4,7 @@
         "projects": "Projets",
         "education": "Formation",
         "experience": "Expérience",
-        "contact": "Contact",
+        "contact": "Contactez-moi",
         "myContacts": "Mes Contacts",
         "lang": "English"
     },
@@ -20,7 +20,8 @@
         "cv": "Mes Contacts",
         "cvDesc": "Coordonnées & CV",
         "technologiesTitle": "Technologies & Outils",
-        "subtitle": "Ingénieur IA & Développeur"
+        "subtitle": "Ingénieur IA & Développeur",
+        "featuresTitle": "Ce que vous trouverez ici"
     },
     "education": {
         "title": "Parcours Académique",
@@ -37,14 +38,23 @@
     },
     "projects": {
         "title": "Mes Projets",
+        "subtitle": "Une sélection de mes réalisations techniques et créatives",
         "empty": "Aucun projet disponible pour le moment.",
         "error": "Impossible de charger les projets",
         "technologies": "Technologies",
-        "demo": "Démo"
+        "demo": "Démo",
+        "count": "projets réalisés",
+        "seeMore": "Voir plus",
+        "seeLess": "Voir moins"
     },
     "contact": {
         "title": "Contactez-moi",
         "tagline": "Je suis ouvert aux opportunités de stage et d'alternance. N'hésitez pas à me contacter !",
+        "sideSectionTitle": "Restons en contact",
+        "sideAvailabilityLabel": "Disponibilité",
+        "sideAvailabilityValue": "Disponible pour une alternance",
+        "sideResponseLabel": "Temps de réponse",
+        "sideResponseValue": "Je réponds sous 24 à 48 heures",
         "nameLabel": "Nom",
         "namePlaceholder": "Votre nom",
         "emailLabel": "Email",
@@ -56,6 +66,7 @@
         "sending": "Envoi en cours...",
         "success": "Message envoyé avec succès !",
         "successDesc": "Je vous répondrai dans les meilleurs délais.",
+        "newMessage": "Nouveau message",
         "error": "Échec de l'envoi du message. Veuillez réessayer."
     },
     "myContacts": {

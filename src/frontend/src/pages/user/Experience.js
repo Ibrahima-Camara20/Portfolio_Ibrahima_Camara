@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getExperiences } from "../../services/api";
 import { FaBriefcase, FaMapMarkerAlt, FaTag, FaClock } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
+import PageHero from "../../components/common/PageHero";
 
 const CATEGORY_CFG = {
     student_job: { color: "#06b6d4", bg: "rgba(6,182,212,0.1)",   dot: "#06b6d4" },
@@ -27,9 +28,7 @@ function Experience() {
     const locale = i18n.language === "fr" ? "fr-FR" : "en-GB";
     const fmt = (d) => new Date(d).toLocaleDateString(locale, { month: "short", year: "numeric" });
 
-    if (loading) return (
-        <div className="pf-page pf-loading"><div className="pf-spinner" /></div>
-    );
+    if (loading) return <div className="pf-page pf-loading"><div className="pf-spinner" /></div>;
 
     if (error) return (
         <div className="pf-page">
@@ -41,15 +40,14 @@ function Experience() {
 
     return (
         <div className="pf-page">
+            <PageHero
+                icon={<FaBriefcase size={11} />}
+                tag={t("nav.experience")}
+                title={t("experience.title")}
+            />
+
             <section className="pf-section">
                 <div className="container">
-                    <div className="pf-section-header">
-                        <span className="pf-section-tag">
-                            <FaBriefcase size={11} /> {t("nav.experience")}
-                        </span>
-                        <h1 className="pf-section-title">{t("experience.title")}</h1>
-                    </div>
-
                     {experiences.length === 0 ? (
                         <div className="pf-alert pf-alert-info" style={{ textAlign: "center", maxWidth: 480, margin: "0 auto" }}>
                             {t("experience.empty")}
@@ -66,18 +64,24 @@ function Experience() {
                                                     className="pf-timeline-dot"
                                                     style={{ background: cfg.dot, boxShadow: `0 0 0 3px ${cfg.bg}` }}
                                                 />
-                                                <div className="pf-card" style={{ padding: "1.75rem", marginLeft: "1.25rem" }}>
+                                                <div
+                                                    className="pf-card"
+                                                    style={{
+                                                        padding: "1.75rem",
+                                                        marginLeft: "1.25rem",
+                                                        borderLeft: `3px solid ${cfg.dot}`,
+                                                    }}
+                                                >
                                                     {/* Top row */}
                                                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "0.75rem", marginBottom: "0.875rem" }}>
                                                         <div>
-                                                            <h4 style={{ fontSize: "1.1rem", margin: "0 0 0.2rem", color: "#0f172a" }}>
+                                                            <h4 style={{ fontSize: "1.1rem", margin: "0 0 0.2rem", color: "#0f172a", fontWeight: 700 }}>
                                                                 {exp.title}
                                                             </h4>
                                                             <p style={{ margin: 0, fontWeight: 600, color: "#334155", fontSize: "0.9rem" }}>
                                                                 {exp.company}
                                                             </p>
                                                         </div>
-
                                                         <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: "0.35rem" }}>
                                                             {exp.is_current && (
                                                                 <span className="pf-badge" style={{ background: "rgba(16,185,129,0.1)", color: "#10b981" }}>
@@ -102,8 +106,9 @@ function Experience() {
                                                         </span>
                                                     </div>
 
+                                                    {/* Description — pre-wrap preserves line breaks from the admin textarea */}
                                                     {exp.description && (
-                                                        <p style={{ color: "#475569", fontSize: "0.9rem", margin: 0, lineHeight: 1.75 }}>
+                                                        <p style={{ color: "#475569", fontSize: "0.9rem", margin: 0, lineHeight: 1.75, whiteSpace: "pre-wrap" }}>
                                                             {exp.description}
                                                         </p>
                                                     )}
