@@ -1,17 +1,17 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Routes, Route, NavLink, Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import {
     FaTachometerAlt, FaUser, FaCode, FaGraduationCap,
-    FaBriefcase, FaTools, FaEnvelope, FaSignOutAlt, FaGlobe,
+    FaBriefcase, FaTools, FaEnvelope, FaSignOutAlt, FaGlobe, FaBars, FaTimes,
 } from "react-icons/fa";
-import Dashboard      from "../../pages/admin/Dashboard";
-import ManageProfile  from "../../pages/admin/ManageProfile";
-import ManageProjects from "../../pages/admin/ManageProjects";
+import Dashboard        from "../../pages/admin/Dashboard";
+import ManageProfile    from "../../pages/admin/ManageProfile";
+import ManageProjects   from "../../pages/admin/ManageProjects";
 import ManageEducation  from "../../pages/admin/ManageEducation";
 import ManageExperience from "../../pages/admin/ManageExperience";
-import ManageSkills   from "../../pages/admin/ManageSkills";
-import ManageContacts from "../../pages/admin/ManageContacts";
+import ManageSkills     from "../../pages/admin/ManageSkills";
+import ManageContacts   from "../../pages/admin/ManageContacts";
 import "./admin.css";
 
 const NAV = [
@@ -27,16 +27,31 @@ const NAV = [
 function AdminLayout() {
     const { logout } = useContext(AuthContext);
     const navigate = useNavigate();
+    const [sideOpen, setSideOpen] = useState(false);
 
     const handleLogout = () => {
         logout();
         navigate("/admin/login");
     };
 
+    const closeSide = () => setSideOpen(false);
+
     return (
         <div className="admin-wrapper">
+            {/* ── Mobile top bar ── */}
+            <div className="admin-topbar">
+                <button className="admin-hamburger" onClick={() => setSideOpen(!sideOpen)} aria-label="Menu">
+                    {sideOpen ? <FaTimes size={18} color="white" /> : <FaBars size={18} color="white" />}
+                </button>
+                <span className="sidebar-logo-text" style={{ fontSize: "0.9rem" }}>Admin Panel</span>
+                <div style={{ width: 36 }} />
+            </div>
+
+            {/* ── Overlay (mobile) ── */}
+            {sideOpen && <div className="admin-overlay" onClick={closeSide} />}
+
             {/* ── Sidebar ── */}
-            <aside className="admin-sidebar">
+            <aside className={`admin-sidebar${sideOpen ? " open" : ""}`}>
                 <div className="sidebar-logo">
                     <div className="sidebar-logo-mark">IC</div>
                     <span className="sidebar-logo-text">Ibrahima Camara</span>
@@ -49,9 +64,8 @@ function AdminLayout() {
                         <NavLink
                             key={item.to}
                             to={item.to}
-                            className={({ isActive }) =>
-                                `sidebar-link${isActive ? " active" : ""}`
-                            }
+                            onClick={closeSide}
+                            className={({ isActive }) => `sidebar-link${isActive ? " active" : ""}`}
                         >
                             <span className="sidebar-icon">{item.icon}</span>
                             {item.label}
@@ -59,7 +73,7 @@ function AdminLayout() {
                     ))}
 
                     <p className="sidebar-section-label" style={{ marginTop: "0.75rem" }}>Autre</p>
-                    <Link to="/" className="sidebar-link">
+                    <Link to="/" className="sidebar-link" onClick={closeSide}>
                         <span className="sidebar-icon"><FaGlobe size={13} /></span>
                         Voir le site
                     </Link>
