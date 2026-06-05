@@ -2,19 +2,9 @@ from rest_framework import serializers
 from .models import Project, Contact, Education, Experience, Skill, PersonalInfo
 
 class PersonalInfoSerializer(serializers.ModelSerializer):
-    cv_url = serializers.SerializerMethodField()
-
     class Meta:
         model = PersonalInfo
         fields = '__all__'
-
-    def get_cv_url(self, obj):
-        if not obj.cv_file:
-            return None
-        request = self.context.get('request')
-        if request:
-            return request.build_absolute_uri(obj.cv_file.url)
-        return obj.cv_file.url
 
 
 class ProjectSerializer(serializers.ModelSerializer):

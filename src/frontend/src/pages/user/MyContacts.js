@@ -42,7 +42,7 @@ function MyContacts() {
     const socialLinks = [
         { icon: <FaLinkedin size={22} />, url: info.linkedin_url, label: "LinkedIn", color: "#0077b5", bg: "rgba(0,119,181,0.09)" },
         { icon: <FaGithub size={22} />, url: info.github_url, label: "GitHub", color: "#0f172a", bg: "rgba(15,23,42,0.07)" },
-        { icon: <FaFileDownload size={20} />, url: info.cv_url, label: "CV", color: "#10b981", bg: "rgba(16,185,129,0.09)" },
+        { icon: <FaFileDownload size={20} />, url: info.cv_link, label: "CV", color: "#10b981", bg: "rgba(16,185,129,0.09)" },
     ].filter((s) => s.url);
 
     return (

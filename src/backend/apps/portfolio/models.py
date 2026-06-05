@@ -112,7 +112,7 @@ class PersonalInfo(models.Model):
     location = models.CharField(max_length=200, blank=True)
     linkedin_url = models.URLField(blank=True, null=True)
     github_url = models.URLField(blank=True, null=True)
-    cv_file = models.FileField(upload_to='cv/', blank=True, null=True)
+    cv_link = models.URLField(blank=True, null=True, help_text="Lien direct vers le CV (Google Drive, Dropbox...)")
     
     class Meta:
         verbose_name = "Informations Personnelles"

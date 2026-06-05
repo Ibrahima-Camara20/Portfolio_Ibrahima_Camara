@@ -5,7 +5,7 @@ import { FaCheckCircle, FaExclamationCircle } from "react-icons/fa";
 const EMPTY = {
     full_name: "", subtitle: "", bio: "",
     email: "", phone: "", location: "",
-    linkedin_url: "", github_url: "",
+    linkedin_url: "", github_url: "", cv_link: "",
 };
 
 function ManageProfile() {
@@ -29,6 +29,7 @@ function ManageProfile() {
                     location:     d.location     || "",
                     linkedin_url: d.linkedin_url || "",
                     github_url:   d.github_url   || "",
+                    cv_link:      d.cv_link       || "",
                 });
             }
         }).catch(console.error).finally(() => setLoading(false));
@@ -55,22 +56,7 @@ function ManageProfile() {
         }
     };
 
-    const handleCVUpload = async (e) => {
-        const file = e.target.files[0];
-        if (!file || !id) return;
-        const data = new FormData();
-        data.append("cv_file", file);
-        try {
-            await API.patch(`personal-info/${id}/`, data, {
-                headers: { "Content-Type": "multipart/form-data" },
-            });
-            setStatus("success");
-        } catch {
-            setStatus("error");
-        }
-    };
-
-    if (loading) return <div className="admin-empty">Chargement...</div>;
+if (loading) return <div className="admin-empty">Chargement...</div>;
 
     return (
         <div>
@@ -107,6 +93,7 @@ function ManageProfile() {
 
                         <Field label="URL LinkedIn" name="linkedin_url" value={form.linkedin_url} onChange={handleChange} />
                         <Field label="URL GitHub" name="github_url" value={form.github_url} onChange={handleChange} />
+                        <Field label="Lien CV (Google Drive, Dropbox...)" name="cv_link" value={form.cv_link} onChange={handleChange} placeholder="https://drive.google.com/..." />
                     </div>
 
                     <div className="admin-form-actions" style={{ marginTop: "1.25rem" }}>
@@ -117,25 +104,6 @@ function ManageProfile() {
                 </form>
             </div>
 
-            {/* CV upload */}
-            <div className="admin-card">
-                <h3 style={sectionTitle}>Curriculum Vitae</h3>
-                <p style={{ color: "#64748b", fontSize: "0.875rem", marginBottom: "1rem" }}>
-                    Uploader un fichier PDF. Il sera disponible en téléchargement sur la page "Mes Contacts".
-                </p>
-                <input
-                    type="file"
-                    accept=".pdf,.doc,.docx"
-                    onChange={handleCVUpload}
-                    disabled={!id}
-                    style={{ fontSize: "0.875rem", color: "#334155" }}
-                />
-                {!id && (
-                    <p style={{ color: "#94a3b8", fontSize: "0.8rem", marginTop: "0.5rem" }}>
-                        Enregistrez d'abord votre profil pour pouvoir uploader un CV.
-                    </p>
-                )}
-            </div>
         </div>
     );
 }
